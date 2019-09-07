@@ -1,0 +1,15 @@
+<!--/* Thymeleaf templating engine, Each token will be replaced by their respective titles in the resulting page. */-->
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Home</title>
+    <link rel="icon" href="#" th:href="@{/img/favicon.ico}" type="image/x-icon"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>UNIR 2019</h1>
+    <a href="https://www.iubenda.com/privacy-policy/27404920" class="iubenda-white iubenda-embed" title="Privacy Policy ">Privacy Policy</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+</div>
+</body>
+</html>

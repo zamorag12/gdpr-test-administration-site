@@ -1,0 +1,97 @@
+<!--/* Thymeleaf templating engine, Each token will be replaced by their respective titles in the resulting page. */-->
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+<head>
+    <title>List City</title>
+
+    <style>
+        .noWrapColumn {
+            white-space: nowrap !important;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="breadcrumb">
+    <h1>Cities Reservations</h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Cities Reservations</li>
+    </ol>
+</div>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <a class="box-title btn btn-primary" th:href="@{/cities/list}">Refresh List</a>
+                    <div class="box-tools">
+                        <form id="form" action="#" method="get" th:action="@{/cities/list}">
+                            <div class="input-group input-group-sm" style="width: 250px;">
+                                <input type="text" name="value" class="form-control pull-right"
+                                       placeholder="Search by name" th:if="${key} == null"/>
+                                <input type="text" name="value" class="form-control pull-right"
+                                       placeholder="Search by name" th:if="${key} != null"
+                                       th:value="${key}"/>
+                                <input type="hidden" name="mode" id="mode"/>
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- /.box-header -->
+                <div class="box-body">
+                    Show <span sd:page-size-selector="javascript"></span> entries
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+
+                            <tr>
+                                <th>No</th>
+                                <th><a class="fa fa-fw fa-sort"><a class="sorted" sd:pagination-sort="name">
+                                    name</th>
+                                <th><a class="fa fa-fw fa-sort"><a class="sorted" sd:pagination-sort="userId">User id</th>
+                                <th><a class="fa fa-fw fa-sort"><a class="sorted" sd:pagination-sort="cities">City
+                                </th>
+
+                                <th>&nbsp;</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="cities,iter : ${data}">
+                                <td th:text="${iter.count}">1</td>
+                                <td th:text="${cities.name}">Name</td>
+                                <td th:text="${cities.userId}">User id</td>
+                                <td th:text="${cities.location}">Location</td>
+
+                            </tr>
+
+                            <tr th:if="${#lists.isEmpty(data.content)}">
+                                <td colspan="13" class="text-center">Data cities</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div th:if="${not #lists.isEmpty(data.content)}">
+                    <div sd:pagination-summary=""></div>
+                    <div class="text-center">
+                        <nav>
+                            <ul class="pagination" sd:pagination="full">
+                                <!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+                                <li class="disabled"><a href="#" aria-label="Previous"><span
+                                        aria-hidden="true">&laquo;</span></a></li>
+                                <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
